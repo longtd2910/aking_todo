@@ -62,7 +62,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 ),
                 const SizedBox(height: 12),
                 const Text(
-                  'Please enter your email below to receive your password reset instructions',
+                  'Please enter your email below to receive your password reset instructions', 
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: RobotoMedium(fontSize: 16, color: Color(0xFF9B9B9B)),
