@@ -14,7 +14,8 @@ class WalkThroughPage extends StatefulWidget {
   State<WalkThroughPage> createState() => _WalkThroughPageState();
 }
 
-class _WalkThroughPageState extends State<WalkThroughPage> with SingleTickerProviderStateMixin {
+class _WalkThroughPageState extends State<WalkThroughPage>
+    with SingleTickerProviderStateMixin {
   int indicator = 0;
 
   Map<int, Color> indicatorToBackgroundColorMap = {
@@ -26,7 +27,10 @@ class _WalkThroughPageState extends State<WalkThroughPage> with SingleTickerProv
   TweenAnimationBuilder<Color?> animateBackground(int indicator) {
     return TweenAnimationBuilder<Color?>(
       duration: const Duration(milliseconds: 200),
-      tween: ColorTween(begin: indicatorToBackgroundColorMap[indicator], end: indicatorToBackgroundColorMap[(indicator == 2) ? 0 : indicator + 1]),
+      tween: ColorTween(
+          begin: indicatorToBackgroundColorMap[indicator],
+          end: indicatorToBackgroundColorMap[
+              (indicator == 2) ? 0 : indicator + 1]),
       builder: (BuildContext context, Color? color, Widget? child) {
         return background(color);
       },
@@ -138,10 +142,12 @@ class _WalkThroughPageState extends State<WalkThroughPage> with SingleTickerProv
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.pushReplacement(
-                          context,
-                          PageTransition(
-                              child: const LoginPage(),
-                              type: PageTransitionType.rightToLeft));
+                        context,
+                        PageTransition(
+                          child: const LoginPage(),
+                          type: PageTransitionType.rightToLeft,
+                        ),
+                      );
                     },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(Colors.white),

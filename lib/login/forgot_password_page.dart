@@ -1,20 +1,28 @@
-import 'package:aking_todo/core/styles.dart';
-import 'package:aking_todo/login/forgot_password_page.dart';
+import 'package:aking_todo/core/utils.dart';
 import 'package:flutter/material.dart';
-import 'package:page_transition/page_transition.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+import '../core/styles.dart';
+
+class ForgotPasswordPage extends StatefulWidget {
+  final String placeholderEmail;
+
+  const ForgotPasswordPage({super.key, required this.placeholderEmail});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<ForgotPasswordPage> createState() => _ForgotPasswordPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
+  late final String email;
   final _usernameFocusNode = FocusNode();
-  final _passwordFocusNode = FocusNode();
-  final _usernameController = TextEditingController();
-  final _passwordController = TextEditingController();
+  final usernameController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    email = Utils.isEmailValid(widget.placeholderEmail) ? widget.placeholderEmail : '';
+    usernameController.text = email;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +38,6 @@ class _LoginPageState extends State<LoginPage> {
             behavior: HitTestBehavior.translucent,
             onTap: () {
               _usernameFocusNode.unfocus();
-              _passwordFocusNode.unfocus();
             },
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -50,12 +57,14 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 const Text(
-                  'Welcome back',
+                  'Forgot Password',
                   style: RobotoThinItalic(fontSize: 32, color: Colors.black),
                 ),
                 const SizedBox(height: 12),
                 const Text(
-                  'Sign in to continue',
+                  'Please enter your email below to receive your password reset instructions',
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                   style: RobotoMedium(fontSize: 16, color: Color(0xFF9B9B9B)),
                 ),
                 const SizedBox(height: 48),
@@ -65,48 +74,10 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 const SizedBox(height: 12),
                 TextField(
-                  controller: _usernameController,
+                  controller: usernameController,
                   focusNode: _usernameFocusNode,
                   decoration:
                       const InputDecoration(hintText: 'Enter your username'),
-                ),
-                const SizedBox(height: 12),
-                const Text(
-                  'Password',
-                  style: RobotoMedium(fontSize: 20, color: Colors.black),
-                ),
-                const SizedBox(height: 12),
-                TextField(
-                  controller: _passwordController,
-                  focusNode: _passwordFocusNode,
-                  decoration:
-                      const InputDecoration(hintText: 'Enter your password'),
-                ),
-                const SizedBox(height: 12),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        Navigator.pushReplacement(
-                          context,
-                          PageTransition(
-                            child: ForgotPasswordPage(
-                              placeholderEmail: _usernameController.text,
-                            ),
-                            type: PageTransitionType.rightToLeft,
-                          ),
-                        );
-                      },
-                      child: const Text(
-                        'Forgot password?',
-                        style: RobotoThinItalic(
-                          fontSize: 18,
-                          color: Color(0xFF313131),
-                        ),
-                      ),
-                    ),
-                  ],
                 ),
                 const SizedBox(height: 80),
                 SizedBox(
@@ -120,7 +91,7 @@ class _LoginPageState extends State<LoginPage> {
                       elevation: MaterialStateProperty.all(5),
                     ),
                     child: const Text(
-                      'Login',
+                      'Send Request',
                       style: RobotoThinItalic(
                         fontSize: 18,
                         color: Colors.white,
