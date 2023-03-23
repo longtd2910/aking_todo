@@ -1,28 +1,30 @@
-import '../core/styles.dart';
-import 'forgot_password_page.dart';
+import '../core/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 
-class LoginPage extends StatefulWidget {
-  final String? email;
-  const LoginPage({Key? key, this.email}) : super(key: key);
+import '../core/styles.dart';
+import 'forgot_password_result_page.dart';
+
+class ForgotPasswordFormPage extends StatefulWidget {
+  final String email;
+
+  const ForgotPasswordFormPage({super.key, required this.email});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<ForgotPasswordFormPage> createState() => _ForgotPasswordFormPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
-  final _usernameFocusNode = FocusNode();
+class _ForgotPasswordFormPageState extends State<ForgotPasswordFormPage> {
+  final _enterCodeFocusNode = FocusNode();
+  final _enterCodeController = TextEditingController();
   final _passwordFocusNode = FocusNode();
-  final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _reEnterPasswordFocusNode = FocusNode();
+  final _reEnterPasswordController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    if (widget.email != null) {
-      _usernameController.text = widget.email!;
-    }
   }
 
   @override
@@ -38,8 +40,9 @@ class _LoginPageState extends State<LoginPage> {
           child: GestureDetector(
             behavior: HitTestBehavior.translucent,
             onTap: () {
-              _usernameFocusNode.unfocus();
+              _enterCodeFocusNode.unfocus();
               _passwordFocusNode.unfocus();
+              _reEnterPasswordFocusNode.unfocus();
             },
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,74 +62,74 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 const Text(
-                  'Welcome back',
+                  'Reset Password',
                   style: RobotoThinItalic(fontSize: 32, color: Colors.black),
                 ),
                 const SizedBox(height: 12),
                 const Text(
-                  'Sign in to continue',
+                  'Reset code was sent to your email. Please enter the code and creae new password',
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                   style: RobotoMedium(fontSize: 16, color: Color(0xFF9B9B9B)),
                 ),
                 const SizedBox(height: 48),
                 const Text(
-                  'Username',
+                  'Enter code',
                   style: RobotoMedium(fontSize: 20, color: Colors.black),
                 ),
                 const SizedBox(height: 12),
                 TextField(
-                  controller: _usernameController,
-                  focusNode: _usernameFocusNode,
-                  decoration: const InputDecoration(hintText: 'Enter your username'),
+                  controller: _enterCodeController,
+                  focusNode: _enterCodeFocusNode,
+                  obscureText: true,
+                  decoration: const InputDecoration(hintText: 'Enter new password'),
                 ),
-                const SizedBox(height: 12),
+                const SizedBox(height: 32),
                 const Text(
-                  'Password',
+                  'Enter new password',
                   style: RobotoMedium(fontSize: 20, color: Colors.black),
                 ),
                 const SizedBox(height: 12),
                 TextField(
                   controller: _passwordController,
                   focusNode: _passwordFocusNode,
-                  decoration: const InputDecoration(hintText: 'Enter your password'),
+                  obscureText: true,
+                  decoration: const InputDecoration(hintText: 'Enter new password'),
+                ),
+                const SizedBox(height: 32),
+                const Text(
+                  'Confirm new password',
+                  style: RobotoMedium(fontSize: 20, color: Colors.black),
                 ),
                 const SizedBox(height: 12),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        Navigator.pushReplacement(
-                          context,
-                          PageTransition(
-                            child: ForgotPasswordPage(
-                              placeholderEmail: _usernameController.text,
-                            ),
-                            type: PageTransitionType.rightToLeft,
-                          ),
-                        );
-                      },
-                      child: const Text(
-                        'Forgot password?',
-                        style: RobotoThinItalic(
-                          fontSize: 18,
-                          color: Color(0xFF313131),
-                        ),
-                      ),
-                    ),
-                  ],
+                TextField(
+                  controller: _reEnterPasswordController,
+                  focusNode: _reEnterPasswordFocusNode,
+                  obscureText: true,
+                  decoration: const InputDecoration(hintText: 'Confirm new password'),
                 ),
                 const SizedBox(height: 80),
                 SizedBox(
                   width: MediaQuery.of(context).size.width,
                   height: 48,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                        context,
+                        PageTransition(
+                          child: ForgotPasswordResultPage(
+                            email: widget.email,
+                          ),
+                          type: PageTransitionType.rightToLeft,
+                        ),
+                      );
+                    },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(const Color(0xFFF96060)),
                       elevation: MaterialStateProperty.all(5),
                     ),
                     child: const Text(
-                      'Login',
+                      'Change password',
                       style: RobotoThinItalic(
                         fontSize: 18,
                         color: Colors.white,
