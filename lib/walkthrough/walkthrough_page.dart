@@ -1,5 +1,5 @@
-import 'package:aking_todo/login/login_page.dart';
-import 'package:aking_todo/walkthrough/walkthrough_widgets.dart';
+import '../login/login_page.dart';
+import 'walkthrough_widgets.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -14,8 +14,7 @@ class WalkThroughPage extends StatefulWidget {
   State<WalkThroughPage> createState() => _WalkThroughPageState();
 }
 
-class _WalkThroughPageState extends State<WalkThroughPage>
-    with SingleTickerProviderStateMixin {
+class _WalkThroughPageState extends State<WalkThroughPage> with SingleTickerProviderStateMixin {
   int indicator = 0;
 
   Map<int, Color> indicatorToBackgroundColorMap = {
@@ -27,10 +26,7 @@ class _WalkThroughPageState extends State<WalkThroughPage>
   TweenAnimationBuilder<Color?> animateBackground(int indicator) {
     return TweenAnimationBuilder<Color?>(
       duration: const Duration(milliseconds: 200),
-      tween: ColorTween(
-          begin: indicatorToBackgroundColorMap[indicator],
-          end: indicatorToBackgroundColorMap[
-              (indicator == 2) ? 0 : indicator + 1]),
+      tween: ColorTween(begin: indicatorToBackgroundColorMap[indicator], end: indicatorToBackgroundColorMap[(indicator == 2) ? 0 : indicator + 1]),
       builder: (BuildContext context, Color? color, Widget? child) {
         return background(color);
       },
@@ -105,9 +101,7 @@ class _WalkThroughPageState extends State<WalkThroughPage>
                         margin: const EdgeInsets.only(left: 8),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          color: (indicator == 0)
-                              ? Colors.black
-                              : const Color(0xFF979797),
+                          color: (indicator == 0) ? Colors.black : const Color(0xFF979797),
                         ),
                       ),
                       Container(
@@ -116,9 +110,7 @@ class _WalkThroughPageState extends State<WalkThroughPage>
                         margin: const EdgeInsets.only(left: 8),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          color: (indicator == 1)
-                              ? Colors.black
-                              : const Color(0xFF979797),
+                          color: (indicator == 1) ? Colors.black : const Color(0xFF979797),
                         ),
                       ),
                       Container(
@@ -127,9 +119,7 @@ class _WalkThroughPageState extends State<WalkThroughPage>
                         margin: const EdgeInsets.only(left: 8),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          color: (indicator == 2)
-                              ? Colors.black
-                              : const Color(0xFF979797),
+                          color: (indicator == 2) ? Colors.black : const Color(0xFF979797),
                         ),
                       ),
                     ],
