@@ -1,9 +1,7 @@
-import '../core/utils.dart';
+import 'package:aking_todo/core/utils.dart';
 import 'package:flutter/material.dart';
-import 'package:page_transition/page_transition.dart';
 
 import '../core/styles.dart';
-import 'forgot_password_form_page.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   final String placeholderEmail;
@@ -64,7 +62,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 ),
                 const SizedBox(height: 12),
                 const Text(
-                  'Please enter your email below to receive your password reset instructions',
+                  'Please enter your email below to receive your password reset instructions', 
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: RobotoMedium(fontSize: 16, color: Color(0xFF9B9B9B)),
@@ -78,26 +76,18 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 TextField(
                   controller: usernameController,
                   focusNode: _usernameFocusNode,
-                  decoration: const InputDecoration(hintText: 'Enter your username'),
+                  decoration:
+                      const InputDecoration(hintText: 'Enter your username'),
                 ),
                 const SizedBox(height: 80),
                 SizedBox(
                   width: MediaQuery.of(context).size.width,
                   height: 48,
                   child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushReplacement(
-                        context,
-                        PageTransition(
-                          child: ForgotPasswordFormPage(
-                            email: email,
-                          ),
-                          type: PageTransitionType.rightToLeft,
-                        ),
-                      );
-                    },
+                    onPressed: () {},
                     style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(const Color(0xFFF96060)),
+                      backgroundColor:
+                          MaterialStateProperty.all(const Color(0xFFF96060)),
                       elevation: MaterialStateProperty.all(5),
                     ),
                     child: const Text(

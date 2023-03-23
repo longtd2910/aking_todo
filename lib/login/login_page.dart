@@ -1,11 +1,10 @@
-import '../core/styles.dart';
-import 'forgot_password_page.dart';
+import 'package:aking_todo/core/styles.dart';
+import 'package:aking_todo/login/forgot_password_page.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 
 class LoginPage extends StatefulWidget {
-  final String? email;
-  const LoginPage({Key? key, this.email}) : super(key: key);
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -16,14 +15,6 @@ class _LoginPageState extends State<LoginPage> {
   final _passwordFocusNode = FocusNode();
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-    if (widget.email != null) {
-      _usernameController.text = widget.email!;
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +67,8 @@ class _LoginPageState extends State<LoginPage> {
                 TextField(
                   controller: _usernameController,
                   focusNode: _usernameFocusNode,
-                  decoration: const InputDecoration(hintText: 'Enter your username'),
+                  decoration:
+                      const InputDecoration(hintText: 'Enter your username'),
                 ),
                 const SizedBox(height: 12),
                 const Text(
@@ -87,7 +79,8 @@ class _LoginPageState extends State<LoginPage> {
                 TextField(
                   controller: _passwordController,
                   focusNode: _passwordFocusNode,
-                  decoration: const InputDecoration(hintText: 'Enter your password'),
+                  decoration:
+                      const InputDecoration(hintText: 'Enter your password'),
                 ),
                 const SizedBox(height: 12),
                 Row(
@@ -122,7 +115,8 @@ class _LoginPageState extends State<LoginPage> {
                   child: ElevatedButton(
                     onPressed: () {},
                     style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(const Color(0xFFF96060)),
+                      backgroundColor:
+                          MaterialStateProperty.all(const Color(0xFFF96060)),
                       elevation: MaterialStateProperty.all(5),
                     ),
                     child: const Text(

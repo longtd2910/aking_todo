@@ -1,5 +1,5 @@
-import 'login/login_page.dart';
-import 'walkthrough/walkthrough_page.dart';
+import 'package:aking_todo/login/login_page.dart';
+import 'package:aking_todo/walkthrough/walkthrough_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
